@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="BaseUser" representedClassName="BaseUser" syncable="YES">
+        <attribute name="auth_status" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="avatar" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="birthday" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="extra" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="gender" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="hx_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="level" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="City" representedClassName="City" syncable="YES">
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Conversation" representedClassName="Conversation" parentEntity="BaseUser" syncable="YES">
+        <attribute name="announcement" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="draft" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="groupRole" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isGroup" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isMyVip" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="last_date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="last_key" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="login_uid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="manager_uid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="member_list" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="placed_top" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="unReadCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="unReceiveScore" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="unSendCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Message" inverseName="target" inverseEntity="Message" syncable="YES"/>
+    </entity>
+    <entity name="LoginUser" representedClassName="LoginUser" parentEntity="BaseUser" syncable="YES">
+        <attribute name="album" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="auth_file" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="auto_focus" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="bank_card" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dynamic" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="fans" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="flower_count" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="focus" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="friends" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="hobby" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="job" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="notice_activity" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="notice_gift" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="notice_group" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="notice_mail" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="notice_msg" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="notice_system" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="region" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="score" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="share_count" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="signature" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tag" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="token" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="visitor" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Member" representedClassName="Member" parentEntity="BaseUser" syncable="YES">
+        <attribute name="isGroup" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="login_time" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="login_uid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="remark" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Message" representedClassName="Message" syncable="YES">
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="extra" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="flower_color" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="flower_costid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="flower_count" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="flower_status" optional="YES" attributeType="Integer 16" defaultValueString="NO" syncable="YES"/>
+        <attribute name="group_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hx_from" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hx_to" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isGroup" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="key" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="link_info" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="media_duration" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="media_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="media_size" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="media_thumb" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="needs_time" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="prompt" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="rsa_key" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="uid_from" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uid_to" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="target" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Conversation" inverseName="messages" inverseEntity="Conversation" syncable="YES"/>
+    </entity>
+    <entity name="Rank" representedClassName="Rank" parentEntity="BaseUser" syncable="YES">
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="rank" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="score" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="BaseUser" positionX="0" positionY="0" width="128" height="178"/>
+        <element name="City" positionX="18" positionY="162" width="128" height="75"/>
+        <element name="Conversation" positionX="9" positionY="99" width="128" height="270"/>
+        <element name="LoginUser" positionX="0" positionY="0" width="128" height="450"/>
+        <element name="Member" positionX="27" positionY="171" width="128" height="103"/>
+        <element name="Message" positionX="0" positionY="0" width="128" height="435"/>
+        <element name="Rank" positionX="9" positionY="153" width="128" height="105"/>
+    </elements>
+</model>
