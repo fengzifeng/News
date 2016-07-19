@@ -37,22 +37,26 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *identifier = @"MCNewsTableViewCell";
+    NSInteger index = 0;
     
-//    if (indexPath.row%20 == 0) {
-//        identifier = @"TopImageCell";
-//    } else if (indexPath.row%20 == 6) {
-//        identifier = @"ImagesCell";
-//    } else if (indexPath.row%20 == 12) {
-//        identifier = @"BigImageCell";
-//    } else {
-//        identifier = @"NewsCell";
-//    }
-    MCNewsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (indexPath.row%20 == 0) {
+        index = 3;
+    } else if (indexPath.row%20 == 6) {
+        index = 2;
+        
+    } else if (indexPath.row%20 == 12) {
+        index = 4;
+        
+    } else {
+        index = 1;
+        
+    }
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:identifier owner:self options:nil] firstObject];
+        cell = [[NSBundle mainBundle] loadNibNamed:identifier owner:self options:nil][index];
     }
     
-    [cell updateCell];
+    //    [cell updateCell];
     
     return cell;
 }
@@ -83,7 +87,7 @@
 
     }
 
-    return 100.f;
+    return height;
 }
 
 
