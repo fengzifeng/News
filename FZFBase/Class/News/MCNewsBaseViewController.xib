@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MCNewsBaseViewController">
             <connections>
-                <outlet property="_tableView" destination="SMW-rS-eVj" id="Fda-Ae-qcz"/>
+                <outlet property="tableView" destination="SMW-rS-eVj" id="2Ud-9v-8Kl"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

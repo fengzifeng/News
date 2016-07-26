@@ -10,6 +10,7 @@
 #import "MCNewsTableViewCell.h"
 #import "MCNewsDetailViewController.h"
 #import "SXDetailPage.h"
+#import "MCVideoViewController.h"
 
 @interface MCNewsBaseViewController ()
 
@@ -65,10 +66,14 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 //    MCNewsDetailViewController *vc = [MCNewsDetailViewController viewController];
-    SXDetailPage *vc = [[SXDetailPage alloc] init];
     
-    [self.navigationController pushViewController:vc animated:YES];
-    
+    if (indexPath.row%20 == 12) {
+        MCVideoViewController *vc = [MCVideoViewController viewController];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        SXDetailPage *vc = [[SXDetailPage alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

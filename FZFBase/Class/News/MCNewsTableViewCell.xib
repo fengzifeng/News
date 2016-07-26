@@ -133,12 +133,12 @@
                             <constraint firstAttribute="height" constant="1" id="beW-tV-6Af"/>
                         </constraints>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="night_cola_bubble_gray" translatesAutoresizingMaskIntoConstraints="NO" id="HPp-Re-VxI">
-                        <rect key="frame" x="337" y="39" width="35" height="32"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HPp-Re-VxI">
+                        <rect key="frame" x="337" y="59" width="35" height="12"/>
                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vMR-Ww-VjR">
-                        <rect key="frame" x="342" y="39" width="25" height="32"/>
+                        <rect key="frame" x="342" y="59" width="25" height="12"/>
                         <fontDescription key="fontDescription" name="HYQiHei-EZJ" family="HYQiHei" pointSize="10"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -198,12 +198,12 @@
                             <constraint firstAttribute="height" constant="1" id="Hle-Et-XkV"/>
                         </constraints>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="night_cola_bubble_gray" translatesAutoresizingMaskIntoConstraints="NO" id="Typ-MS-GgW">
-                        <rect key="frame" x="329" y="8" width="35" height="32"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Typ-MS-GgW">
+                        <rect key="frame" x="329" y="8" width="35" height="12"/>
                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="21b-Wo-18a">
-                        <rect key="frame" x="334" y="8" width="25" height="32"/>
+                        <rect key="frame" x="334" y="8" width="25" height="12"/>
                         <fontDescription key="fontDescription" name="HYQiHei-EZJ" family="HYQiHei" pointSize="10"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -246,7 +246,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="215"/>
                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="night_photoset_list_cell_icon" translatesAutoresizingMaskIntoConstraints="NO" id="05b-9U-KXB">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="05b-9U-KXB">
                         <rect key="frame" x="5" y="219" width="35" height="22"/>
                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -310,7 +310,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="215"/>
                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="night_photoset_list_cell_icon" translatesAutoresizingMaskIntoConstraints="NO" id="nql-LF-R5m">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nql-LF-R5m">
                         <rect key="frame" x="5" y="219" width="35" height="22"/>
                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -410,8 +410,4 @@
             </tableViewCellContentView>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="night_cola_bubble_gray" width="32" height="32"/>
-        <image name="night_photoset_list_cell_icon" width="32" height="32"/>
-    </resources>
 </document>

@@ -9,11 +9,8 @@
 #import "MCViewController.h"
 
 @interface MCNewsBaseViewController : MCViewController <UITableViewDelegate,UITableViewDataSource>
-{
-    IBOutlet UITableView *_tableView;
-    
-}
 
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, assign) NSInteger page;
 
 
