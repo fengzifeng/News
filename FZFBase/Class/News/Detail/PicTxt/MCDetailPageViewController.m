@@ -1,17 +1,19 @@
 //
+//  MCNewsBaseViewController.m
+//  FZFBase
+//
+//  Created by fengzifeng on 16/7/11.
+//  Copyright © 2016年 fengzifeng. All rights reserved.
 
-#import "SXNewsDetailBottomCell.h"
-//#import "SXNewsDetailViewModel.h"
-#import "SXDetailPage.h"
-//#import "SXSearchPage.h"
-//#import "SXReplyPage.h"
+#import "MCNewsDetailBottomCell.h"
+#import "MCDetailPageViewController.h"
 #import "WebViewJavascriptBridge.h"
-#import "imageInfo.h"
-#import "videoInfo.h"
+#import "MCImageInfo.h"
+#import "MCVideoInfo.h"
 
 #define kNewsDetailControllerClose (self.tableView.contentOffset.y - (self.tableView.contentSize.height - SCREEN_HEIGHT + 55) > (100 - 54))
 
-@interface SXDetailPage ()<UIWebViewDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface MCDetailPageViewController ()<UIWebViewDelegate,UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, copy)NSMutableString *requestUrlString;
 @property (nonatomic, strong)UIWebView *webView;
 @property (nonatomic, strong)WebViewJavascriptBridge *bridge;
@@ -19,12 +21,7 @@
 
 @property (nonatomic, copy)NSString *detailID;
 
-//@property (weak, nonatomic) IBOutlet UIButton *replyCountBtn;
-//@property (weak, nonatomic) IBOutlet UIButton *backBtn;
-//@property (weak, nonatomic) IBOutlet UITableView *tableView;
-
-@property(nonatomic,strong)SXNewsDetailBottomCell *closeCell;
-//@property(nonatomic,strong)SXNewsDetailViewModel *viewModel;
+@property(nonatomic,strong)MCNewsDetailBottomCell *closeCell;
 @property(nonatomic,strong) NSArray *news;
 
 @property(nonatomic,strong)UIImageView *bigImg;
@@ -33,9 +30,8 @@
 
 @end
 
-@implementation SXDetailPage
+@implementation MCDetailPageViewController
 
-#pragma mark - **************** lazy
 - (NSArray *)news
 {
     if (_news == nil) {
@@ -79,64 +75,7 @@
     [_tableView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(_topInset, 0, 0, 0)];
     [self initJSbirdge];
     [self setupRequest];
-//    UIButton *downLoad = [[UIButton alloc]initWithFrame:CGRectMake(SXSCREEN_W - 60, SXSCREEN_H - 60, 50, 50)];
-//    [downLoad setImage:[UIImage imageNamed:@"203"] forState:UIControlStateNormal];
-//    [self.hoverView addSubview:downLoad];
-//    @weakify(self)
-//    [[downLoad rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(id x) {
-//        @strongify(self)
-//        UIImageWriteToSavedPhotosAlbum(self.bigImg.image, nil, nil, nil);
-//    }];
-//    
-//
-//    RAC(self.viewModel,newsModel) = RACObserve(self, newsModel);
-//    [[RACObserve(self.viewModel, replyCountBtnTitle)skip:1]subscribeNext:^(NSString *x) {
-//        @strongify(self)
-//        [self.replyCountBtn setTitle:x forState:UIControlStateNormal];
-//    }];
-    
-//    [[self.viewModel.fetchNewsDetailCommand execute:nil]subscribeError:^(NSError *error) {
-//        // 暂时不做什么操作
-//    } completed:^{
-//        [self showInWebView];
-//        [self requestForFeedbackList];
-//    }];
-//    
-//    [[[RACSignal combineLatest:@[[_viewModel.fetchHotFeedbackCommand.executing skip:1],[_viewModel.fetchNewsDetailCommand.executing skip:1]]] filter:^BOOL(RACTuple *x) {
-//        return ![x.first boolValue]&&![x.second boolValue];
-//    }]subscribeNext:^(id x) {
-//        @strongify(self)
-//        [self.tableView reloadData];
-//    }];
-//    
-//    self.automaticallyAdjustsScrollViewInsets = NO;
 }
-
-//- (void)viewWillAppear:(BOOL)animated
-//{
-//    [self.navigationController setNavigationBarHidden:YES animated:YES];
-//    self.tabBarController.tabBar.hidden = YES;
-//}
-
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    SXReplyPage *replyvc = segue.destinationViewController;
-//    replyvc.source = SXReplyPageFromNewsDetail;
-//    replyvc.newsModel = self.newsModel;
-//    
-//    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-//        self.navigationController.interactivePopGestureRecognizer.delegate = nil;
-//    }
-//    
-//    [[NSNotificationCenter defaultCenter]postNotification:[NSNotification notificationWithName:@"contentStart" object:nil]];
-//}
-
-//- (IBAction)backBtn:(id)sender {
-//    CFRelease((__bridge CFTypeRef)self);
-//    CFIndex rc = CFGetRetainCount((__bridge CFTypeRef)self);
-//    NSLog(@"%ld",rc);
-//    [self.navigationController popViewControllerAnimated:YES];
-//}
 
 - (void)initJSbirdge {
     
@@ -201,7 +140,7 @@
             NSLog(@"这个新闻里面有视频或者音频---");
             NSMutableArray *videos = [NSMutableArray arrayWithCapacity:[videoArray count]];
             for (NSDictionary *videoDic in videoArray) {
-                videoInfo *videoin = [[videoInfo alloc] initWithInfo:videoDic];
+                MCVideoInfo *videoin = [[MCVideoInfo alloc] initWithInfo:videoDic];
                 [videos addObject:videoin];
                 NSRange range = [bodyStr rangeOfString:videoin.ref];
                 NSString *videoStr = [NSString stringWithFormat:@"<embed height='50' width='280' src='%@' />",videoin.url_mp4];
@@ -222,7 +161,7 @@
             
             for (NSDictionary *d in imageArray) {
                 
-                imageInfo *info = [[imageInfo alloc] initWithInfo:d];//kvc
+                MCImageInfo *info = [[MCImageInfo alloc] initWithInfo:d];//kvc
                 [images addObject:info];
                 NSRange range = [bodyStr rangeOfString:info.ref];
                 NSArray *wh = [info.pixel componentsSeparatedByString:@"*"];
@@ -256,18 +195,12 @@
     
 }
 
-//- (void)webViewDidFinishLoad:(UIWebView *)webView
-//{
-//    self.webView.height = self.webView.scrollView.contentSize.height;
-//    [_tableView reloadData];
-//}
-
 - (void)getImageFromDownloaderOrDiskByImageUrlArray:(NSArray *)imageArray {
     
     for (NSDictionary *d in imageArray) {
         
         NSMutableArray *images = [NSMutableArray arrayWithCapacity:[imageArray count]];
-        imageInfo *info = [[imageInfo alloc] initWithInfo:d];//kvc
+        MCImageInfo *info = [[MCImageInfo alloc] initWithInfo:d];//kvc
         [images addObject:info];
         NSString *path = [UIImage diskCachePathWithURL:info.src];
         NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -293,11 +226,6 @@
     
     return [string stringByReplacingOccurrencesOfString:@"/"withString:@"_"];
 }
-
-//- (void)showInWebView
-//{
-//    [self.webView loadHTMLString:@"http://c.m.163.com/nc/article/xukunhenwuliao/full.html" baseURL:nil];
-//}
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
@@ -330,11 +258,11 @@
     if (section == 0) {
         return self.webView;
     }else if (section == 1){
-        SXNewsDetailBottomCell *head = [SXNewsDetailBottomCell theSectionHeaderCell];
+        MCNewsDetailBottomCell *head = [MCNewsDetailBottomCell theSectionHeaderCell];
         head.sectionHeaderLbl.text = @"热门跟帖";
         return head;
     }else if (section == 2){
-        SXNewsDetailBottomCell *head = [SXNewsDetailBottomCell theSectionHeaderCell];
+        MCNewsDetailBottomCell *head = [MCNewsDetailBottomCell theSectionHeaderCell];
         head.sectionHeaderLbl.text = @"相关新闻";
         return head;
     }
@@ -356,7 +284,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     if (section == 2){
-        SXNewsDetailBottomCell *closeCell = [SXNewsDetailBottomCell theCloseCell];
+        MCNewsDetailBottomCell *closeCell = [MCNewsDetailBottomCell theCloseCell];
         self.closeCell = closeCell;
         return closeCell;
     }
@@ -393,27 +321,23 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        return [SXNewsDetailBottomCell theShareCell];
+        return [MCNewsDetailBottomCell theShareCell];
+        
     }else if (indexPath.section == 1){
-        if (1) {
-            SXNewsDetailBottomCell *foot = [SXNewsDetailBottomCell theSectionBottomCell];
-            return foot;
-        }else{
-            SXNewsDetailBottomCell *hotreply = [SXNewsDetailBottomCell theHotReplyCellWithTableView:tableView];
-//            hotreply.replyModel = self.viewModel.replyModels[indexPath.row];
-            return hotreply;
-        }
+        MCNewsDetailBottomCell *foot = [MCNewsDetailBottomCell theSectionBottomCell];
+        return foot;
+        
     }else if (indexPath.section == 2){
         if (indexPath.row == 0) {
-            SXNewsDetailBottomCell *cell = [SXNewsDetailBottomCell theKeywordCell];
+            MCNewsDetailBottomCell *cell = [MCNewsDetailBottomCell theKeywordCell];
             [cell.contentView addSubview:[self addKeywordButton]];
             return cell;
         }else{
-            SXNewsDetailBottomCell *other = [SXNewsDetailBottomCell theContactNewsCell];
-//            other.sameNewsEntity = self.viewModel.sameNews[indexPath.row];
+            MCNewsDetailBottomCell *other = [MCNewsDetailBottomCell theContactNewsCell];
             return other;
         }
     }
+    
     return [UITableViewCell new];
 }
 
@@ -421,12 +345,10 @@
 {
     if (indexPath.section == 0) {
         return 126;
+        
     }else if (indexPath.section == 1){
-//        if (indexPath.row == self.viewModel.replyModels.count) {
-//            return 50;
-//        }else{
-            return 110.5;
-//        }
+        return 110.5;
+        
     }else if (indexPath.section == 2){
         if (indexPath.row == 0) {
             return 60;
@@ -442,11 +364,8 @@
     if (indexPath.section == 0) {
         return 126;
     }else if (indexPath.section == 1){
-//        if (indexPath.row == self.viewModel.replyModels.count) {
-//            return 50;
-//        }else{
-            return 110.5;
-//        }
+        return 110.5;
+        
     }else if (indexPath.section == 2){
         if (indexPath.row == 0) {
             return 60;
@@ -482,43 +401,10 @@
     }
 }
 
-#pragma mark - **************** other
-// 提前把评论的请求也发出去 得到评论的信息
-- (void)requestForFeedbackList
-{
-//    [self.viewModel.fetchHotFeedbackCommand execute:nil];
-    // 成功和失败暂时都不做什么操作，所以subscribe就不写了
-}
-
 - (UIView *)addKeywordButton
 {
-//    CGFloat maxRight = 20;
     UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60)];
-//    for (int i = 0;i<self.viewModel.keywordSearch.count ; ++i) {
-//        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(maxRight, 10, 0, 0)];
-//        button.titleLabel.font = [UIFont systemFontOfSize:14];
-//        [button setTitleColor:SXRGBColor(74, 133, 198) forState:UIControlStateNormal];
-//        [button setTitle:self.viewModel.keywordSearch[i][@"word"] forState:UIControlStateNormal];
-//        [button setBackgroundImage:[UIImage imageNamed:@"choose_city_normal"] forState:UIControlStateNormal];
-//        [button setBackgroundImage:[UIImage imageNamed:@"choose_city_highlight"] forState:UIControlStateHighlighted];
-//        [button sizeToFit];
-//        button.width += 20;
-//        button.height = 35;
-//        
-//        [self rac_liftSelector:@selector(keywordButtonClick:) withSignalsFromArray:@[[button rac_signalForControlEvents:UIControlEventTouchUpInside]]];
-// 
-//        maxRight = button.x + button.width + 10;
-//        [view addSubview:button];
-//    }
     return view;
-}
-
-- (void)keywordButtonClick:(UIButton *)sender
-{
-//    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    SXSearchPage *sp = [sb instantiateViewControllerWithIdentifier:@"SXSearchPage"];
-//    sp.keyword = sender.titleLabel.text;
-//    [self.navigationController pushViewController:sp animated:YES];
 }
 
 // 截图用于做上划返回
@@ -592,28 +478,9 @@
         [imgView setImageWithURL:parameters[@"src"]completed:^(UIImage *image) {
             [self moveToCenter];
         }];
-//        [imgView sd_setImageWithURL:[NSURL URLWithString:parameters[@"src"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//            [self moveToCenter];
-//        }];
     }else{
         [self moveToCenter];
     }
-    
-//    [imgView addTapAction:@selector(moveToOrigin) target:self];
-    
-}
-
-- (void)moveToOrigin
-{
-//    [UIView animateWithDuration:0.5 animations:^{
-//        self.hoverView.alpha = 0.0f;
-//        self.bigImg.frame = CGRectMake(8, [self.temImgPara[@"top"] floatValue], SXSCREEN_W-15, [self.temImgPara[@"height"] floatValue]);
-//    } completion:^(BOOL finished) {
-//        [self.hoverView removeFromSuperview];
-//        [self.bigImg removeFromSuperview];
-////        self.hoverView = nil;
-//        self.bigImg = nil;
-//    }];
 }
 
 - (void)moveToCenter

@@ -6,9 +6,9 @@
 //  Copyright (c) 2015年 xukun. All rights reserved.
 //
 
-#import "Videoinfo.h"
+#import "MCVideoInfo.h"
 
-@implementation videoInfo
+@implementation MCVideoInfo
 
 - (id)initWithInfo:(NSDictionary *)dic
 {

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface videoInfo : NSObject
+@interface MCVideoInfo : NSObject
 
 - (id)initWithInfo:(NSDictionary *)dic;
 

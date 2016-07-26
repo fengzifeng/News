@@ -16,7 +16,6 @@ static NSString *cellIdentifier = @"MCPicCollectionViewCell";
     UICollectionView *_collectionView;
 }
 
-
 @end
 
 @implementation MCPictureBrowersViewController
@@ -109,7 +108,6 @@ static NSString *cellIdentifier = @"MCPicCollectionViewCell";
 #pragma mark UIScrollView Delegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    //    [self.navigationController setNavigationBarHidden:YES animated:NO];//隐藏导航栏
     [self.navigationBar setHidden:true];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];  // 隐藏状态栏
 }

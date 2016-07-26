@@ -6,9 +6,9 @@
 //  Copyright (c) 2015年 xukun. All rights reserved.
 //
 
-#import "ImageInfo.h"
+#import "MCImageInfo.h"
 
-@implementation imageInfo
+@implementation MCImageInfo
 
 - (id)initWithInfo:(NSDictionary *)dic
 {

@@ -152,7 +152,7 @@
             NSLog(@"这个新闻里面有视频或者音频---");
             NSMutableArray *videos = [NSMutableArray arrayWithCapacity:[videoArray count]];
             for (NSDictionary *videoDic in videoArray) {
-                videoInfo *videoin = [[videoInfo alloc] initWithInfo:videoDic];
+                MCVideoInfo *videoin = [[MCVideoInfo alloc] initWithInfo:videoDic];
                 [videos addObject:videoin];
                 NSRange range = [bodyStr rangeOfString:videoin.ref];
                 NSString *videoStr = [NSString stringWithFormat:@"<embed height='50' width='280' src='%@' />",videoin.url_mp4];
@@ -173,7 +173,7 @@
             
             for (NSDictionary *d in imageArray) {
                 
-                imageInfo *info = [[imageInfo alloc] initWithInfo:d];//kvc
+                MCImageInfo *info = [[MCImageInfo alloc] initWithInfo:d];//kvc
                 [images addObject:info];
                 NSRange range = [bodyStr rangeOfString:info.ref];
                 NSArray *wh = [info.pixel componentsSeparatedByString:@"*"];
@@ -218,7 +218,7 @@
     for (NSDictionary *d in imageArray) {
         
         NSMutableArray *images = [NSMutableArray arrayWithCapacity:[imageArray count]];
-        imageInfo *info = [[imageInfo alloc] initWithInfo:d];//kvc
+        MCImageInfo *info = [[MCImageInfo alloc] initWithInfo:d];//kvc
         [images addObject:info];
         NSString *path = [UIImage diskCachePathWithURL:info.src];
         NSFileManager *fileManager = [NSFileManager defaultManager];

@@ -8,8 +8,8 @@
 
 #import "MCViewController.h"
 #import "WebViewJavascriptBridge.h"
-#import "imageInfo.h"
-#import "videoInfo.h"
+#import "MCImageInfo.h"
+#import "MCVideoInfo.h"
 
 @interface MCNewsDetailViewController : MCViewController <UIWebViewDelegate,UITableViewDelegate,UITableViewDataSource>
 {

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface imageInfo : NSObject
+@interface MCImageInfo : NSObject
 
 @property(nonatomic,copy)NSString *alt;
 @property(nonatomic,copy)NSString *pixel;

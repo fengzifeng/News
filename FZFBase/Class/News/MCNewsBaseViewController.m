@@ -9,7 +9,7 @@
 #import "MCNewsBaseViewController.h"
 #import "MCNewsTableViewCell.h"
 #import "MCNewsDetailViewController.h"
-#import "SXDetailPage.h"
+#import "MCDetailPageViewController.h"
 #import "MCVideoViewController.h"
 #import "MCPictureBrowersViewController.h"
 
@@ -76,7 +76,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
     else {
-        SXDetailPage *vc = [[SXDetailPage alloc] init];
+        MCDetailPageViewController *vc = [[MCDetailPageViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

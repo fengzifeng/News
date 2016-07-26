@@ -1,16 +1,15 @@
 //
+//  MCNewsBaseViewController.m
+//  FZFBase
+//
+//  Created by fengzifeng on 16/7/11.
+//  Copyright © 2016年 fengzifeng. All rights reserved.
 
 #import <UIKit/UIKit.h>
-//#import "SXReplyEntity.h"
-//#import "SXSimilarNewsEntity.h"
 
-@interface SXNewsDetailBottomCell : UITableViewCell
+@interface MCNewsDetailBottomCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *sectionHeaderLbl;
-
-//@property(nonatomic,strong)SXReplyEntity *replyModel;
-//
-//@property(nonatomic,strong)SXSimilarNewsEntity *sameNewsEntity;
 
 @property(nonatomic,assign)BOOL iSCloseing;
 
