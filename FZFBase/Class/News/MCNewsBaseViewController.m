@@ -11,6 +11,7 @@
 #import "MCNewsDetailViewController.h"
 #import "SXDetailPage.h"
 #import "MCVideoViewController.h"
+#import "MCPictureBrowersViewController.h"
 
 @interface MCNewsBaseViewController ()
 
@@ -70,7 +71,11 @@
     if (indexPath.row%20 == 12) {
         MCVideoViewController *vc = [MCVideoViewController viewController];
         [self.navigationController pushViewController:vc animated:YES];
-    } else {
+    } else if (indexPath.row%20 == 6) {
+        MCPictureBrowersViewController *vc = [[MCPictureBrowersViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else {
         SXDetailPage *vc = [[SXDetailPage alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }

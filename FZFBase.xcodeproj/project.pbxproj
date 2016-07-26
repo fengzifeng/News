@@ -166,6 +166,12 @@
 		3755A1481D40CCDF0078C374 /* quanping@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3755A1461D40CCDF0078C374 /* quanping@2x.png */; };
 		3755A1491D40CCDF0078C374 /* quanping@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3755A1471D40CCDF0078C374 /* quanping@3x.png */; };
 		3755A14B1D40DA730078C374 /* 204.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3755A14A1D40DA730078C374 /* 204.mp4 */; };
+		3755A15E1D474E0C0078C374 /* MCPictureBrowersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3755A15D1D474E0C0078C374 /* MCPictureBrowersViewController.m */; };
+		3755A1611D474F120078C374 /* MCPicCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3755A1601D474F120078C374 /* MCPicCollectionViewCell.m */; };
+		3755A1661D4758000078C374 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3755A1621D4758000078C374 /* 1.png */; };
+		3755A1671D4758000078C374 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3755A1631D4758000078C374 /* 2.png */; };
+		3755A1681D4758000078C374 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3755A1641D4758000078C374 /* 3.png */; };
+		3755A1691D4758000078C374 /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = 3755A1651D4758000078C374 /* 4.png */; };
 		379A7ECB1D2BB64300757F36 /* USNavDelegateHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 379A7EC71D2BB64300757F36 /* USNavDelegateHandler.m */; };
 		379A7ECC1D2BB64300757F36 /* USTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 379A7EC91D2BB64300757F36 /* USTransitionAnimator.m */; };
 		379A7ECF1D2BBA1F00757F36 /* ApplicationContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 379A7ECE1D2BBA1F00757F36 /* ApplicationContext.m */; };
@@ -483,6 +489,14 @@
 		3755A1461D40CCDF0078C374 /* quanping@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "quanping@2x.png"; sourceTree = "<group>"; };
 		3755A1471D40CCDF0078C374 /* quanping@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "quanping@3x.png"; sourceTree = "<group>"; };
 		3755A14A1D40DA730078C374 /* 204.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 204.mp4; sourceTree = "<group>"; };
+		3755A15C1D474E0C0078C374 /* MCPictureBrowersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPictureBrowersViewController.h; sourceTree = "<group>"; };
+		3755A15D1D474E0C0078C374 /* MCPictureBrowersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPictureBrowersViewController.m; sourceTree = "<group>"; };
+		3755A15F1D474F120078C374 /* MCPicCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPicCollectionViewCell.h; sourceTree = "<group>"; };
+		3755A1601D474F120078C374 /* MCPicCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPicCollectionViewCell.m; sourceTree = "<group>"; };
+		3755A1621D4758000078C374 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		3755A1631D4758000078C374 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
+		3755A1641D4758000078C374 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
+		3755A1651D4758000078C374 /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4.png; sourceTree = "<group>"; };
 		379A7EC61D2BB64300757F36 /* USNavDelegateHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USNavDelegateHandler.h; sourceTree = "<group>"; };
 		379A7EC71D2BB64300757F36 /* USNavDelegateHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USNavDelegateHandler.m; sourceTree = "<group>"; };
 		379A7EC81D2BB64300757F36 /* USTransitionAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USTransitionAnimator.h; sourceTree = "<group>"; };
@@ -1117,6 +1131,7 @@
 		37559FD91D34BC060078C374 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				3755A1581D473AD30078C374 /* PictureBrowse */,
 				3755A0C11D350C760078C374 /* SXDetailPage.h */,
 				3755A0C21D350C760078C374 /* SXDetailPage.m */,
 				3755A1351D40C9610078C374 /* MCVideoViewController.h */,
@@ -1176,6 +1191,21 @@
 				3755A1311D40C76F0078C374 /* TBVideoRequestTask.m */,
 			);
 			path = TBPlayer;
+			sourceTree = "<group>";
+		};
+		3755A1581D473AD30078C374 /* PictureBrowse */ = {
+			isa = PBXGroup;
+			children = (
+				3755A1621D4758000078C374 /* 1.png */,
+				3755A1631D4758000078C374 /* 2.png */,
+				3755A1641D4758000078C374 /* 3.png */,
+				3755A1651D4758000078C374 /* 4.png */,
+				3755A15C1D474E0C0078C374 /* MCPictureBrowersViewController.h */,
+				3755A15D1D474E0C0078C374 /* MCPictureBrowersViewController.m */,
+				3755A15F1D474F120078C374 /* MCPicCollectionViewCell.h */,
+				3755A1601D474F120078C374 /* MCPicCollectionViewCell.m */,
+			);
+			path = PictureBrowse;
 			sourceTree = "<group>";
 		};
 		379A7EC31D2BB64300757F36 /* Navigation */ = {
@@ -1303,6 +1333,7 @@
 				374C6FA81D2F70F4003577CA /* USPicker-Checkmark-Selected@2x.png in Resources */,
 				37559F6B1D3491E20078C374 /* MCNewsDetailViewController.xib in Resources */,
 				37E5CB7E1D2E650800842A51 /* main_tabBar_find_highlight@3x.png in Resources */,
+				3755A1681D4758000078C374 /* 3.png in Resources */,
 				3755A0F01D3E1A7C0078C374 /* MCLiveViewController.xib in Resources */,
 				373757D11D00001200582ECD /* MCRootViewController.xib in Resources */,
 				37E5CB7C1D2E650800842A51 /* main_tabBar_find@3x.png in Resources */,
@@ -1317,9 +1348,11 @@
 				37E5CB801D2E650800842A51 /* main_tabBar_msg@3x.png in Resources */,
 				37E5CB811D2E650800842A51 /* main_tabBar_msg_highlight@2x.png in Resources */,
 				3755A1491D40CCDF0078C374 /* quanping@3x.png in Resources */,
+				3755A1691D4758000078C374 /* 4.png in Resources */,
 				3755A1451D40CCD60078C374 /* icon_play@3x.png in Resources */,
 				3755A13C1D40CCA70078C374 /* icon_play_hl@2x.png in Resources */,
 				37E5CB791D2E650800842A51 /* main_tabBar_circle_highlight@2x.png in Resources */,
+				3755A1671D4758000078C374 /* 2.png in Resources */,
 				374C6FA71D2F70F4003577CA /* USPicker-Checkbox@3x.png in Resources */,
 				3755A1391D40C9610078C374 /* MCVideoViewController.xib in Resources */,
 				37E5CB841D2E650800842A51 /* main_tabBar_my@3x.png in Resources */,
@@ -1333,6 +1366,7 @@
 				37559F2F1D3362D10078C374 /* MCFeedbackViewController.xib in Resources */,
 				37E5CB631D2E63FE00842A51 /* MCHomeViewController.xib in Resources */,
 				374C6FA91D2F70F4003577CA /* USPicker-Checkmark-Selected@3x.png in Resources */,
+				3755A1661D4758000078C374 /* 1.png in Resources */,
 				373757281CFFFD5700582ECD /* Assets.xcassets in Resources */,
 				37E5CB7A1D2E650800842A51 /* main_tabBar_circle_highlight@3x.png in Resources */,
 				374C6FAE1D2F70F4003577CA /* USAssetGroupViewController.xib in Resources */,
@@ -1381,6 +1415,7 @@
 				373758AF1D000C1800582ECD /* NSString+Emoji.m in Sources */,
 				373758621D0005CC00582ECD /* MatchParser.m in Sources */,
 				37559E9B1D2F9D250078C374 /* RSKImageScrollView.m in Sources */,
+				3755A1611D474F120078C374 /* MCPicCollectionViewCell.m in Sources */,
 				37559FE51D34BC2D0078C374 /* imageInfo.m in Sources */,
 				373758AE1D000C1800582ECD /* NSString+Common.m in Sources */,
 				37559E9A1D2F9D250078C374 /* RSKImageCropViewController.m in Sources */,
@@ -1419,6 +1454,7 @@
 				3737584C1D0005AF00582ECD /* MJRefreshAutoGifFooter.m in Sources */,
 				3737585A1D0005AF00582ECD /* UIScrollView+MJRefresh.m in Sources */,
 				37559F2E1D3362D10078C374 /* MCFeedbackViewController.m in Sources */,
+				3755A15E1D474E0C0078C374 /* MCPictureBrowersViewController.m in Sources */,
 				370B4F491D0820E2000D12FF /* SwitchView.m in Sources */,
 				37E5CB5C1D2E61D500842A51 /* MCHomeViewController.m in Sources */,
 				374C6FAD1D2F70F4003577CA /* USAssetGroupViewController.m in Sources */,
