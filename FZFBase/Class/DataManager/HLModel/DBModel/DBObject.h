@@ -95,3 +95,13 @@
 
 @end
 
+
+@interface DMObject : DBObject
+{
+    NSManagedObjectID *_objectID;
+}
+
+@property (nonatomic, readonly, strong) NSManagedObjectID *objectID;
+
+@end
+

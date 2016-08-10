@@ -21,5 +21,6 @@
 #import "DataHash.h"
 #import "HttpManager.h"
 #import "ApplicationContext.h"
+#import "NLCoreData.h"
 
 #endif /* PrefixHeader_pch */

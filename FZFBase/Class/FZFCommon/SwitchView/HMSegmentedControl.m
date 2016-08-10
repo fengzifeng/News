@@ -26,6 +26,7 @@
     if (self = [super init]) {
         self.sectionTitles = sectiontitles;
         [self setDefaults];
+        [self creatLabels:self.sectionTitles];
     }
     
     return self;
@@ -53,7 +54,6 @@
     
     [self.layer addSublayer:self.selectedSegmentLayer];
     [self addSubview:self.selectedBGView];
-    [self creatLabels:self.sectionTitles];
     
     if (self.sectionTitles){
         [self updateSegmentsRects];

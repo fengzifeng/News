@@ -499,3 +499,19 @@ value = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutabl
 @end
 
 
+@implementation DMObject
+
+- (void)populateWithObject:(id)object
+{
+    if (object && [object isKindOfClass:[NSManagedObject class]]) {
+        _objectID = [(NSManagedObject *)object objectID];
+        
+        if ([_objectID isTemporaryID]) [object obtainPermanentID];
+        
+    }
+    [super populateWithObject:object];
+}
+
+@end
+
+

@@ -10,20 +10,23 @@
 #import "SwitchView.h"
 #import "MCNewsBaseViewController.h"
 #import "HMSegmentedControl.h"
+#import "FFNewsModel.h"
+#import "News.h"
+#import "FFNewsCollectionViewCell.h"
+
+static NSString *cellIdentifier1 = @"FFNewsCollectionViewCell";
 
 @interface MCNewsViewController ()<UIScrollViewDelegate>
 
 {
     NSArray *_sourseArray;
     NSInteger _currentPage;
-
+    NSMutableArray *_dataArray;
 }
 
-@property (strong, nonatomic) NSMutableArray *reusableViewControllers; //重用数组
-@property (strong, nonatomic) NSMutableArray *visibleViewControllers;  //可见的数组
-@property (strong, nonatomic) UIScrollView *scrollView;
-@property (strong, nonatomic) SwitchView *switchView;
 @property (nonatomic, strong) HMSegmentedControl *subjectSC;
+@property (nonatomic, strong) UICollectionView *collectionView;
+
 @property (nonatomic, assign) NSInteger selectedSubjectIndex;// 目前选择的科目
 
 @end
@@ -41,17 +44,79 @@
 {
     [super viewDidLoad];
     _sourseArray = @[@"游戏新闻",@"赛事新闻",@"战队新闻",@"行业新闻"];
+    _dataArray = [NSMutableArray new];
     
-    [self.view addSubview:self.scrollView];
-//    [self.view addSubview:self.switchView];
     [self.view addSubview:self.subjectSC];
-
-//    [self.switchView endMoveToIndex:1];
-
-    [self loadPage:0];
-    [self.scrollView scrollRectToVisible:CGRectMake(0*self.scrollView.frame.size.width, 0.0, self.scrollView.frame.size.width,self.scrollView.frame.size.height) animated:NO];
-
+    [self.view addSubview:self.collectionView];
+    if (![self fetchEventListData].count) {
+        [self saveData];
+    } else {
+        [self.collectionView reloadData];
+    }
  }
+
+- (void)saveData
+{
+    //模拟数据
+    NSMutableArray *newsArray = [NSMutableArray new];
+    for (int i = 0; i < 80; i++) {
+        FFNewsModel *model = [[FFNewsModel alloc] initWithObject:@{@"news_type":@(arc4random()%5),@"cell_type":@((arc4random()%5)+1),@"id":@(i)}];
+        [newsArray addObject:model];
+    }
+    
+    [News performBlock:^(NSManagedObjectContext *context) {
+        
+        for (FFNewsModel *model in newsArray) {
+            News *news = [News fetchOrInsertSingleInContext:context predicate:@"id==%i",model.id];
+            [news populateWithDictionary:model.dictionary];
+            
+            NSLog(@"cell == %@",news.cell_type);
+            
+        }
+    } complete:^(BOOL success) {
+        [self fetchEventListData];
+        [self.collectionView reloadData];
+    }];
+}
+
+- (NSArray *)filterData:(NSNumber *)type
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"news_type==%@",type];
+    return [_dataArray filteredArrayUsingPredicate:predicate];
+}
+
+- (NSArray *)fetchEventListData
+{
+    NSArray *modelArray = [News fetchInBgWithRequest:nil];
+    _dataArray = [FFNewsModel modelListWithArray:modelArray];
+    
+    return _dataArray;
+}
+
+- (UICollectionView *)collectionView
+{
+    if (!_collectionView) {
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0,44 + 64, SCREEN_WIDTH, SCREEN_HEIGHT - 44 - 64 - 49) collectionViewLayout:layout];
+        
+        [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+        [_collectionView registerNib:[UINib nibWithNibName:cellIdentifier1 bundle:nil] forCellWithReuseIdentifier:cellIdentifier1];
+        
+        _collectionView.backgroundColor = [UIColor whiteColor];
+        _collectionView.clipsToBounds = YES;
+        _collectionView.scrollsToTop = NO;
+        _collectionView.pagingEnabled = YES;
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+        layout.minimumInteritemSpacing = 0;
+        layout.minimumLineSpacing = 0;
+        _collectionView.showsHorizontalScrollIndicator = NO;
+        
+        [self.view insertSubview:_collectionView atIndex:0];
+    }
+    
+    return _collectionView;
+}
 
 - (HMSegmentedControl *)subjectSC{
     
@@ -81,8 +146,8 @@
     
     if (curIndex == self.selectedSubjectIndex) return;
     self.selectedSubjectIndex = curIndex;
-    [self loadPage:curIndex];
-    [_scrollView scrollRectToVisible:CGRectMake(self.selectedSubjectIndex*_scrollView.frame.size.width, 0.0, _scrollView.frame.size.width,_scrollView.frame.size.height) animated:NO];
+    
+    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:self.selectedSubjectIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];
 }
 
 - (void)setSegmentViewSlectedIndex:(NSInteger)index{
@@ -92,163 +157,31 @@
     [self.subjectSC setSelectedIndex:index animated:YES];
 }
 
-- (UIScrollView *)scrollView
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if (!_scrollView) {
-        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,44 + 64, SCREEN_WIDTH, SCREEN_HEIGHT - 44 - 64 - 49)];
-        _scrollView.delegate = self;
-        _scrollView.pagingEnabled = YES;
-        _scrollView.scrollsToTop = NO;
-        _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH*_sourseArray.count, SCREEN_HEIGHT - 44 - 64 - 49);
-        _scrollView.showsHorizontalScrollIndicator = NO;
-        
-        for (int i = 0; i<_sourseArray.count; i++) {
-            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH*i, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 44 - 64 - 49)];
-            view.backgroundColor = i%2?[UIColor yellowColor]:[UIColor whiteColor];
-            
-            [_scrollView addSubview:view];
-        }
-    }
-    
-    return _scrollView;
+    return _sourseArray.count;
 }
 
-- (NSMutableArray *)visibleViewControllers
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (!_visibleViewControllers) _visibleViewControllers = [NSMutableArray array];
+    FFNewsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier1 forIndexPath:indexPath];
+    [cell reloadView:[self filterData:@(indexPath.row)]];
     
-    return _visibleViewControllers;
+    return cell;
 }
 
-- (NSMutableArray *)reusableViewControllers
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (!_reusableViewControllers) _reusableViewControllers = [NSMutableArray array];
-    
-    return _reusableViewControllers;
-}
-
-//- (SwitchView *)switchView
-//{
-//    if (!_switchView) {
-//        _switchView = [[SwitchView alloc]initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
-//        _switchView.oneScreen = YES;
-//        _switchView.titleArray = _sourseArray;
-//        __weak typeof (self.scrollView)weakScrollView = self.scrollView;
-//        __weak typeof (self)weakSelf = self;
-//
-//        [_switchView setTapItemWithIndex:^(NSInteger index,BOOL animation){
-//            [weakSelf loadPage:index];
-//            [weakScrollView scrollRectToVisible:CGRectMake(index*weakScrollView.frame.size.width, 0.0, weakScrollView.frame.size.width,weakScrollView.frame.size.height) animated:NO];
-//        }];
-//    }
-//    
-//    return _switchView;
-//}
-
-#pragma mark - Reusable重用
-- (void)loadPage:(NSInteger)page
-{
-    if (_reusableViewControllers.count && page == _currentPage) return;
-    
-    _currentPage = page;
-    NSMutableArray *pagesToLoad = [@[@(page - 1), @(page), @(page + 1)] mutableCopy];
-    NSMutableArray *vcsToEnqueue = [NSMutableArray array];
-    
-    for (MCNewsBaseViewController *vc in self.visibleViewControllers) {
-        if (!vc.page || ![pagesToLoad containsObject:@(vc.page)]) {
-            [vcsToEnqueue addObject:vc];
-        } else if (vc.page) {
-            [pagesToLoad removeObject:@(vc.page)];
-        }
-    }
-    
-    for (MCNewsBaseViewController *vc in vcsToEnqueue) {
-        [vc.view removeFromSuperview];
-        [self.visibleViewControllers removeObject:vc];
-    }
-    
-    for (NSNumber *page in pagesToLoad) {
-        [self addViewControllerForPage:[page integerValue]];
-    }
-}
-
-- (void)addViewControllerForPage:(NSInteger)page
-{
-    if (page < 0 || page >= _sourseArray.count) return;
-    
-    MCNewsBaseViewController *vc = [self dequeueReusableViewController:page];
-    vc.view.frame = CGRectMake(self.scrollView.frame.size.width * page, 0.0, self.scrollView.frame.size.width, self.scrollView.frame.size.height);
-    
-    [self.scrollView addSubview:vc.view];
-    [self.visibleViewControllers addObject:vc];
-}
-
-- (MCNewsBaseViewController *)dequeueReusableViewController:(NSInteger)page
-{
-    for (MCNewsBaseViewController *vc in _reusableViewControllers) {
-        
-        if (vc.page == page) return vc;
-    }
-    
-    
-    if (page == 0) {
-        MCNewsBaseViewController *vc = [MCNewsBaseViewController viewController];
-        vc.page = page;
-        [vc willMoveToParentViewController:self];
-        [self addChildViewController:vc];
-        [vc didMoveToParentViewController:self];
-        [self enqueueReusableViewController:vc];
-        
-        return vc;
-        
-    }else if (page == 1) {
-        MCNewsBaseViewController *vc = [MCNewsBaseViewController viewController];
-        vc.page = page;
-        [vc willMoveToParentViewController:self];
-        [self addChildViewController:vc];
-        [vc didMoveToParentViewController:self];
-        [self enqueueReusableViewController:vc];
-        
-        return vc;
-    }else if (page == 2) {
-        MCNewsBaseViewController *vc = [MCNewsBaseViewController viewController];
-        vc.page = page;
-        [vc willMoveToParentViewController:self];
-        [self addChildViewController:vc];
-        [vc didMoveToParentViewController:self];
-        [self enqueueReusableViewController:vc];
-        
-        return vc;
-    }else{
-        MCNewsBaseViewController *vc = [MCNewsBaseViewController viewController];
-        vc.page = page;
-        [vc willMoveToParentViewController:self];
-        [self addChildViewController:vc];
-        [vc didMoveToParentViewController:self];
-        [self enqueueReusableViewController:vc];
-        
-        return vc;
-    }
-}
-
-- (void)enqueueReusableViewController:(MCNewsBaseViewController *)viewController
-{
-    if (![self.reusableViewControllers containsObject:viewController]) {
-        [self.reusableViewControllers addObject:viewController];
-    }
+    return CGSizeMake(SCREEN_WIDTH , collectionView.height);
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     
-    if (scrollView == self.scrollView) {
-        NSInteger page = roundf(scrollView.contentOffset.x / scrollView.frame.size.width);
-        page = MAX(page, 0);
-        page = MIN(page, _sourseArray.count - 1);
-        [self setSegmentViewSlectedIndex:page];
-
-//        [_switchView endMoveToIndex:page];
-        [self loadPage:page];
-    }
+    NSInteger page = roundf(scrollView.contentOffset.x / scrollView.frame.size.width);
+    page = MAX(page, 0);
+    page = MIN(page, _sourseArray.count - 1);
+    [self setSegmentViewSlectedIndex:page];
 }
 
 - (void)viewWillAppear:(BOOL)animated

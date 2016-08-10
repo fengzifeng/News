@@ -8,6 +8,6 @@
 
 #import "MCViewController.h"
 
-@interface MCNewsViewController : MCViewController
+@interface MCNewsViewController : MCViewController <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @end

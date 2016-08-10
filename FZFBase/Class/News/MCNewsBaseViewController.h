@@ -12,6 +12,8 @@
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, assign) NSInteger page;
+@property (nonatomic, strong) NSArray *dataArray;
+
 
 
 
