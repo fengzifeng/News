@@ -8,7 +8,6 @@
 
 #import "FFNewsCollectionViewCell.h"
 #import "MCNewsTableViewCell.h"
-#import "MCNewsDetailViewController.h"
 #import "MCDetailPageViewController.h"
 #import "MCVideoViewController.h"
 #import "MCPictureBrowersViewController.h"
@@ -54,22 +53,19 @@
         cell = [[NSBundle mainBundle] loadNibNamed:identifier owner:self options:nil][model.cell_type];
     }
     
-    //    [cell updateCell];
-    
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    //    MCNewsDetailViewController *vc = [MCNewsDetailViewController viewController];
     
     FFNewsModel *model = _dataArray[indexPath.row];
     
     if (model.cell_type == TOPVIDEO_CELL_TYPE) {
         MCVideoViewController *vc = [MCVideoViewController viewController];
         [self.nearsetViewController.navigationController pushViewController:vc animated:YES];
-    } else if (model.cell_type == TOPIMAGE_CELL_TYPE) {
+    } else if (model.cell_type == TOPIMAGE_CELL_TYPE || model.cell_type == IMAGES_CELL_TYPE) {
         MCPictureBrowersViewController *vc = [[MCPictureBrowersViewController alloc] init];
         [self.nearsetViewController.navigationController pushViewController:vc animated:YES];
     }

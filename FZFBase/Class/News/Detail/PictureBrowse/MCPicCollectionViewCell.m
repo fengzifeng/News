@@ -60,8 +60,8 @@
     UIScrollView *scrollView = [[UIScrollView alloc] initForAutoLayout];
     scrollView.backgroundColor = RGBACOLOR(0, 0, 0, 0.95);
     self.bottomScrollView = scrollView;
-    [self.imageScrollView addSubview:self.bottomScrollView];
-    self.bottomScrollView.frame = CGRectMake(0, SCREEN_HEIGHT - 150, SCREEN_WIDTH, 150);
+    [self.contentView addSubview:self.bottomScrollView];
+    self.bottomScrollView.frame = CGRectMake(10, SCREEN_HEIGHT - 150, SCREEN_WIDTH, 150);
     
     NSString *contStr = @"可是你的男的就看你看就是你能看出你女婿你们v每年需吗可是你的男的就看你看就是你能看出你女婿你们v每年需吗可是你的男的就看你看就是你能看出你女婿你们v每年需吗可是你的男的就看你看就是你能看出你女婿你们v每年需吗可是你的男的就看你看就是你能看出你女婿你们v每年需吗可是你的男的就看你看就是你能看出你女婿你们v每年需吗可是你的男的就看你看就是你能看出你女婿你们v每年需吗可是你的男的就看你看就是你能看出你女婿你们v每年需吗可是你的男的就看你看就是你能看出你女婿你们v每年需吗可是你的男的就看你看就是你能看出你女婿你们v每年需吗可是你的男的就看你看就是你能看出你女婿你们v每年需吗可是你的男的就看你看就是你能看出你女婿你们v每年需吗可是你的男的就看你看就是你能看出你女婿你们v每年需吗可是你的男的就看你看就是你能看出你女婿你们v每年需吗可是你的男的就看你看就是你能看出你女婿你们v每年需吗可是你的男的就看你看就是你能看出你女婿你们v每年需吗可是你的男的就看你看就是你能看出你女婿你们v每年需吗";
     float height = [contStr stringHeightWithFont:kFont_13 width:SCREEN_WIDTH - 20];
